@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>DMISmap: A Prototype of Disaster Data Management System in the U-Tapao Cathment using Google Map</title>
+    <link href='https://fonts.googleapis.com/css?family=Kanit&subset=thai,latin' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="../css/style.css" charset="utf-8">
+    <link rel="stylesheet" href="../css/infowindow.css" charset="utf-8">
+    <link href="../libraries/seven7/stylesheets/bootstrap.min.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="../libraries/seven7/stylesheets/datatables.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="../libraries/seven7/stylesheets/datepicker.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="../libraries/seven7/stylesheets/timepicker.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="../libraries/seven7/stylesheets/bootstrap-editable.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="../libraries/seven7/stylesheets/select2.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="../libraries/seven7/stylesheets/style.css" media="all" rel="stylesheet" type="text/css" />
+    <script src="../libraries/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../libraries/sweetalert/dist/sweetalert.css">
+    <link rel="stylesheet" href="../libraries/font-awesome/css/font-awesome.min.css">
+    <script type="text/javascript" src="../libraries/seven7/jquery/jquery.js"></script>
+    <script src="../libraries/jquery/jquery-1.9.1.js" type="text/javascript"></script>
+    <script src="../libraries/jquery/jquery-ui.js" type="text/javascript"></script>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+  </head>
+  <div class="navigationbar">
+    <div class="nav-container">
+      <table  width="100%" border="0">
+        <tr>
+          <td width="300">
+            <img src="../images/RTIlogo.png" alt="" />
+          </td>
+          <td>
+            <div class="text-left" >
+              <a href="index.html" class="link-a"><i class="fa fa-home"></i> หน้าหลัก</a> &nbsp;&nbsp;
+              <!-- <a href="management.html" class="link-a">จัดการข้อมูล</a> &nbsp;&nbsp; -->
+              <a href="alertlist.html" class="link-a">รายการร้องขอทั้งหมด</a> &nbsp;&nbsp;
+              <a href="about.html" class="link-a">เกี่ยวกับโครงการ</a> &nbsp;&nbsp;
+              <!-- <a href="developer.html" class="link-a">ทีมพัฒนา</a> &nbsp;&nbsp; -->
+              <a href="document.html" class="link-a">คู่มือการใช้งาน</a> &nbsp;&nbsp;
+            </div>
+          </td>
+          <td width="100p">
+            <div id="login" class="text-center" style=" height: 40px; padding-top: 8px;">
+              <i class="th"></i> ออกจากระบบ
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="container-fluid" style="padding-top: 70px;">
+    <div class="row">
+      <div class="text-center">
+        <h1 style="font-family: 'Kanit', sans-serif;">“ต้นแบบระบบสารสนเทศเพื่อการจัดการข้อมูลพิบัติภัยในพื้นที่ลุ่มน้ำอู่ตะเภาโดยใช้ Google Map”</h1>
+        <h4 style="font-family: 'Kanit', sans-serif;">โดย อ.เทิดทูน ดำรงค์ฤทธามาตย์ และ ผศ.เถกิง วงศ์ศิริโชติ ภาควิชาวิทยาศาสตร์ประยุกต์ คณะวิทยาศาสตร์ มหาวิทยาลัยสงขลานครินทร์<br>
+        (ภายใต้โครงการความร่วมมือเพื่อการพัฒนาเชิงพื้นที่จังหวัดสงขลาแบบสร้างสรรค์ ระหว่าง ม.อ. และ สกว. ปีที่ 1)</h4>
+      </div>
+      <hr>
+      <div class="col-sm-12">
+        <p>
+          &nbsp;&nbsp;&nbsp;&nbsp;เนื่องจากพื้นที่ลุ่มน้ำคลองอู่ตะเภาครอบคลุมพื้นที่ประมาณ 2,400 ตารางกิโลเมตร ซึ่งตั้งอยู่ทางตอนใต้ของ จังหวัดสงขลา มีพื้นที่ลุ่มน้ำอยู่ในเขตอำเภอหาดใหญ่ อำเภอคลองหอยโข่ง อำเภอนาหม่อม อำเภอสะเดา อำเภอบางกล่ำ และบางส่วนอยู่ในเขตอำเภอเมืองและอำเภอควนเนียง สภาพภูมิประเทศของลุ่มน้ำจะมีลักษณะเป็นแอ่งกระทะ พื้นที่ลาดเทจากทิศใต้ในเขตอำเภอสะเดาลงสู่ทิศเหนือบริเวณทะเลสาบสงขลา ในลุ่มน้ำคลองอู่ตะเภาโดยเฉลี่ยจะมีฝนตกตลอดทั้งปี ในปี 2531 ระดับน้ำท่วมเมืองหาดใหญ่ ระดับน้ำสูงเกือบ 2 เมตร ส่วนปี 2543 ระดับน้ำสูง 3 เมตร และในปี 2553 ความลึกน้ำท่วมเฉลี่ย 1.50 เมตร ความลึกน้ำท่วมสูงสุด 3.30 เมตร และมีปริมาณน้ำท่วมขัง 375 ล้านลูกบาศก์เมตร
+        </p>
+        <p>
+          &nbsp;&nbsp;&nbsp;&nbsp;ในสถานการณ์น้ำท่วม หน่วยงานของรัฐ โดยเฉพาะอย่างยิ่งมหาวิทยาลัยสงขลานครินทร์ จะจัดตั้งหน่วยประสานงานน้ำท่วมที่มีหน้าที่หลัก คณะผู้วิจัย คัดเลือก 2 ชุมชนนำร่องที่มีความเสี่ยงในการเกิดภัยพิบัติในพื้นที่หาดใหญ่ และมีการจัดทำระบบสารสนเทศเพื่อการจัดการข้อมูล เพื่อจัดการข้อมูลภัยพิบัติในลุ่มน้ำอู่ตะเภาโดยใช้ Google Map และในขั้นตอนสุดท้ายของโครงการวิจัย คณะผู้วิจัยทำการสำรวจเพิ่มเติมอีก 4 ชุมชน ได้แก่ ชุมชนวัดหาดใหญ่ใน ชุมชนศาลาลุงทอง ชุมชนมัสยิดบ้านเหนือ (คูเต่า) และชุมชนบ้านในสวน (ควนลัง) โดยได้สำรวจทั้งหมด 238, 100, 129 และ 77 ครัวเรือนตามลำดับ
+        </p>
+        <p>
+          &nbsp;&nbsp;&nbsp;&nbsp;คณะผู้วิจัยได้ดำเนินการพัฒนาระบบสารสนเทศฯ เพื่อเป็นช่องทางการสื่อสารเพื่อการเตือนภัย ประชาชนในพื้นที่สำรวจข้อมูล รับทราบถึงการมีอยู่ของช่องทางแจ้งข้อมูลน้ำท่วมและได้ใช้ประโยชน์จากช่องทางต่างๆ ได้แก่ การเตือนภัยผ่านทางแอพพลิเคชันทางสมาร์ทโฟน การเตือนภัยผ่านทางข้อความสั้น (SMS) นอกจากนี้ผู้วิจัยได้พัฒนาฟังก์ชันการทำงานสำหรับการร้องขอความช่วยเหลือเมื่อเกิดเหตุภัยพิบัติ โดยแอพพลิเคชันที่พัฒนาขึ้นสามารถนำไปติดตั้งบนสมาร์ทโฟนที่ใช้ระบบปฏิบัติการแอนด์ดรอย ผู้ประสบภัยสามารถส่งข้อมูลร้องความช่วยเหลือมายังเครื่องแม่ข่าย โดยเครื่องแม่ข่ายจะแสดงข้อมูลบนแผนที่ โดยระบุตำแหน่งที่ตั้งของผู้ประสบภัยจาก GPS ซึ่งทำให้ผู้ประสานงานการช่วยเหลือ สามารถรู้ตำแหน่งของผู้ประสบภัย และสามารถบริหารจัดการเพื่อเข้าช่วยเหลือได้อย่างทันท่วงที
+        </p>
+      </div>
+    </div>
+    <hr>
+    <div class="row" style="padding-bottom: 30px;">
+      <div class="col-sm-12">
+        <div class="text-center">
+          Copyright © A Prototype of Disaster Data Management System in the U-Tapao Cathment using Google Map - http://ictcluster.sci.psu.ac.th/dmis<br>
+สาขาเทคโนโลยีสารสนเทศและการสื่อสาร คณะวิทยาศาสตร์ มหาวิทยาลัยสงขลานครินทร์, Research and Development Office (RDO)
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <body>
+
+  </body>
+
+  <!-- <script type="text/javascript" src="js/alertlist.js"></script> -->
+</html>

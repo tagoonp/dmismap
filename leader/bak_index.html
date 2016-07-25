@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>DMISmap: A Prototype of Disaster Data Management System in the U-Tapao Cathment using Google Map</title>
+    <link href='https://fonts.googleapis.com/css?family=Kanit&subset=thai,latin' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="../css/style.css" charset="utf-8">
+    <link rel="stylesheet" href="../css/infowindow.css" charset="utf-8">
+    <link href="../libraries/seven7/stylesheets/bootstrap.min.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="../libraries/seven7/stylesheets/datatables.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="../libraries/seven7/stylesheets/datepicker.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="../libraries/seven7/stylesheets/timepicker.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="../libraries/seven7/stylesheets/bootstrap-editable.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="../libraries/seven7/stylesheets/select2.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="../libraries/seven7/stylesheets/style.css" media="all" rel="stylesheet" type="text/css" />
+    <script src="../libraries/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../libraries/sweetalert/dist/sweetalert.css">
+    <link rel="stylesheet" href="../libraries/font-awesome/css/font-awesome.min.css">
+    <script type="text/javascript" src="../libraries/seven7/jquery/jquery.js"></script>
+    <script src="../libraries/jquery/jquery-1.9.1.js" type="text/javascript"></script>
+    <script src="../libraries/jquery/jquery-ui.js" type="text/javascript"></script>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+  </head>
+  <div class="navigationbar">
+    <div class="nav-container">
+      <table  width="100%" border="0">
+        <tr>
+          <td width="300">
+            <img src="../images/RTIlogo.png" alt="" />
+          </td>
+          <td>
+            <div class="text-left" >
+              <a href="index.html" class="link-a"><i class="fa fa-home"></i> หน้าหลัก</a> &nbsp;&nbsp;
+              <a href="alertlist.html" class="link-a">รายการร้องขอทั้งหมด</a> &nbsp;&nbsp;
+              <a href="about.html" class="link-a">เกี่ยวกับโครงการ</a> &nbsp;&nbsp;
+              <a href="developer.html" class="link-a">ทีมพัฒนา</a> &nbsp;&nbsp;
+              <a href="document.html" class="link-a">คู่มือการใช้งาน</a> &nbsp;&nbsp;
+            </div>
+          </td>
+          <td width="100p">
+            <div id="login" class="text-center" style=" height: 40px; padding-top: 8px;">
+              <i class="th"></i> ออกจากระบบ
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="rightcontainer shadow1" style="display:none;" id="rightContent">
+    <div class="" style="padding: 60px 20px 9px 20px;color: #155D87; border: solid; border-width: 0px 0px 1px 0px; border-color: #ccc;  ">
+      <div class="row" style="padding: 0px; margin: 0px;">
+        <div class="col-sm-6" style="padding: 0px; margin: 0px;">
+          <i class="fa fa-angle-double-right" id="hdManager" style="cursor: pointer;"></i>&nbsp;&nbsp;ข้อมูลการร้องขอรายพิกัด
+        </div>
+        <div class="col-sm-6" style="padding: 0px; margin: 0px;">
+
+        </div>
+      </div>
+
+    </div>
+    <div class="" style="padding: 10px 0px; color: #000;">
+      <div class="row" style="margin: 0px;">
+        <div class="col-sm-6">
+          <div class="" style="padding: 10px 0px 10px 10px;">
+            <div class="row" style="margin: 0px;">
+              <div class="col-sm-9" style="margin: 0px; padding: 0px;">
+                <div class="">
+                  ช่องทางการแจ้ง : <span style="color: #888;" id="markerChanel">-</span>
+                </div>
+              </div>
+              <div class="col-sm-3" style="margin: 0px; padding: 0px;">
+                <div class="text-right" style="padding-bottom: 5px;">
+                  <span id="markerImg"></span>
+                </div>
+              </div>
+            </div>
+            <div class="imgpanel">
+
+            </div>
+          </div>
+          <div class="" style="padding: 0px 0px 5px 10px; ">
+            ข้อมูลตำแหน่ง
+          </div>
+          <div class="" style="padding: 0px 0px 15px 10px;">
+            <span id="markerAddress" style="color: #888;">N/A</span><br>
+          </div>
+          <div class="" style="padding: 0px 0px 15px 10px;">
+            ชื่อตำแหน่งโดยสังเขป <span id="markerAddress2" style="color: #888;"></span>
+          </div>
+          <div class="" style="padding: 0px 0px 15px 10px;">
+            ชื่อตำแหน่งจากข้อมูลผู้ใช้ <span id="markerAddress3" style="color: #888;"></span>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="" style="padding: 10px 0px 10px 10px;">
+            ID : <span id="markerID" style="color: #888;">N/A</span>
+          </div>
+          <div class="" style="padding: 0px 0px 10px 10px;">
+            หมายเลขโทรศัพท์ : <span id="markerPhone" style="color: #888;">N/A</span>
+          </div>
+          <div class="" style="padding: 0px 0px 10px 10px;">
+            ผู้แจ้ง : <span id="markerUser" style="color: #888;">N/A</span>
+          </div>
+          <div class="" style="padding: 0px 0px 10px 10px;">
+            ระดับความต้องการ : <span id="markerLevel"></span>
+          </div>
+          <div class="" style="padding: 5px 10px;">
+            <table class="table table-condensed" style="padding: 0px; margin: 0px; color: #888;">
+              <thead style="background: #74A8C7; color: #fff;">
+                <th>
+                  ปัจจัยพื้นฐาน
+                </th>
+                <th>
+
+                </th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    อาหาร
+                  </td>
+                  <td>
+                    <span id="markerFood"></span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    ยารักษาโรค
+                  </td>
+                  <td>
+                    <span id="markerDrug"></span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="" style="padding: 0px 0px 5px 10px; ">
+            ความต้องการ/รายละเอียดอื่นๆ
+          </div>
+          <div class="" style="padding: 0px 0px 15px 10px;">
+            <span id="markerOther" style="color: #888;">N/A</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="" style="padding: 10px 20px 12px 20px;color: #155D87; border: solid; border-width: 1px 0px 1px 0px; border-color: #ccc;  ">
+      การประสานงาน
+    </div>
+
+    <div class="" style="padding: 10px 0px;">
+      <div class="row" style="margin: 0px;">
+        <div class="col-sm-7 nst">
+          <div class="nst" style="padding: 5px 0px 5px 10px; color: #000;">
+            จัดการประสาน
+          </div>
+          <div class="nst" style="padding: 5px 0px 5px 10px;">
+            <select class="form-control" name="" id="txtInstitute" >
+              <option value="" selected="">-- เลือกศูนย์ประสานงาน --</option>
+            </select>
+          </div>
+          <div class="nst" style="padding: 5px 0px 5px 10px; color: #000;">
+            สถานะต่อไป
+          </div>
+          <div class="nst" style="padding: 5px 0px 5px 10px;">
+            <select class="form-control" name="" id="txtNextstate" >
+              <option value="1">รับแจ้งเหตุ</option>
+              <option value="2">ประสานงาน/ช่วยเหลือ</option>
+              <option value="3">ได้รับการช่วยเหลือแล้ว</option>
+            </select>
+          </div>
+          <div class="nst" style="padding: 5px 0px 5px 10px; color: #000;">
+            รายชื่อผู้ประสานงาน
+          </div>
+          <div class="nst" id="coList" style="padding: 5px 0px 5px 10px;">
+            <table class="table table-condensed" style="padding: 0px; margin: 0px;">
+              <thead style="background: #f3f3f3;">
+                <th>
+                  ชื่อผู้ประสาน
+                </th>
+                <th>
+                  ตำแหน่ง
+                </th>
+                <th>
+                  หมายเลขโทรศัพท์
+                </th>
+                <th>
+                  &nbsp;
+                </th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    ไม่พบข้อมูล
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="col-sm-5">
+          <div class="" style="padding: 5px 0px 5px 0px; color: #000;">
+            ประวัติการประสานงาน
+          </div>
+          <div class="" id="stageList" style="padding: 5px 0px 5px 0px;">
+            <table class="table table-condensed" style="padding: 0px; margin: 0px;">
+              <thead style="background: #f3f3f3;">
+                <th>
+                  ชื่อผู้ประสาน
+                </th>
+                <th>
+                  วันที่-เวลา
+                </th>
+                <th>
+                  สถานะ
+                </th>
+              </thead>
+              <tbody>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="leftcontainer shadow1" style="padding-top: 55px; font-size: 0.8em;">
+    <div class="cus-row">
+      <div class="col-10" style="border:solid; border-width: 0px 0px 1px 0px; border-color: #ccc; color: #155D87; font-size: 1.2em;">
+        <i class="fa fa-gear"></i> ตั้งค่าการกรองข้อมูล
+      </div>
+    </div>
+    <div class="cus-row">
+      <div class="displayPanel" id="style-3" style="overflow: scroll; overflow-x: hidden; " >
+        <!-- <div class="col-10" style=" padding-top: 10px; font-size: 1.2em;">
+          <span style="color: #155D87; ">เลือกการแสดงผลระดับพื้นที่</span> :<br>
+          <select class="form-control select2-container select2able select2-container-active selection" name="" style="border-color: #E9E9E9;">
+            <option value="3">อำเภอ</option>
+            <option value="4">ตำบล</option>
+            <option value="5" selected="">พิกัด</option>
+          </select>
+        </div> -->
+        <div class="col-10" style="padding-top: 10px; font-size: 1.2em;">
+          <span style="color: #155D87; ">เหตุการณ์</span> :<br>
+          <div class="" style="padding-top: 5px;">
+            <span style="font-size: 0.8em;">
+              <input type="checkbox" name="chkStage0" id="chkStage0" value="0"> ทั้งหมด &nbsp;&nbsp;<br>
+              <input type="checkbox" name="chkStage1" id="chkStage1" class="cbAll" value="1" checked=""> การร้องขอ &nbsp;&nbsp;<br>
+              <input type="checkbox" name="chkStage2" id="chkStage2" class="cbAll" value="2" checked=""> กำลังดำเนินการ<br>
+              <input type="checkbox" name="chkStage3" id="chkStage3" class="cbAll" value="3" checked=""> ช่วยเหลือแล้ว<br>
+              <input type="checkbox" name="chkStage4" id="chkStage4" class="cbAll" value="4"> ช่วยเหลือแล้ว (มากกว่า 4 ชั่วโมง)<br>
+            </span>
+          </div>
+        </div>
+
+        <div class="col-10" style="padding-top: 0px; font-size: 1.2em;">
+          <span style="color: #155D87; ">หมุดอื่นๆ</span> :<br>
+          <div class="" style="padding-top: 5px;">
+            <span style="font-size: 0.8em;">
+              <input type="checkbox" name="chkOther1" id="chkOther1" value="1" > ศูนย์ประสานงาน<br>
+            </span>
+          </div>
+        </div>
+      </div>
+      <!-- End display panel -->
+      <!-- <hr style="margin: 0px;"> -->
+
+      <div class="">
+        <div class="">
+          <table class="table" border="0"  style="padding:0px; margin: 0px;">
+            <tr>
+              <td id="listBtn1" class="listBtn" width="33%" >
+                <div id="req1Btn" class="text-center" style="color: #fff; height: 21px;">
+                  การร้องขอ
+                </div>
+              </td>
+              <td id="listBtn2" class="listBtn" width="33%" >
+                <div id="req2Btn" class="text-center" style="color: #fff;">
+                  กำลัง<br>ดำเนินการ
+                </div>
+              </td>
+              <td id="listBtn3" class="listBtn" >
+                <div id="req3Btn" class="text-center" style="color: #fff;">
+                  ช่วยเหลือแล้ว
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- List of notistification -->
+        <div class="">
+          <table class="table table-condensed">
+            <thead>
+              <tr style="background: #74A8C7;">
+                <th>
+                  &nbsp;
+                </th>
+                <th style="width: 40%; color: #fff;">
+                  จน. เหตุการณ์
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <img src="../images/marker/redpin2.png" alt="" /> การร้องขอ
+                </td>
+                <td>
+                  <span id="r1">0</span>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <img src="../images/marker/ylpin2.png" alt="" /> กำลังดำเนินการ
+                </td>
+                <td>
+                  <span id="r2">0</span>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <img src="../images/marker/grpin2.png" alt="" /> ช่วยเหลือแล้ว
+                </td>
+                <td>
+                  <span id="r3">0</span>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <img src="../images/marker/blpin.png" alt="" /> ช่วยเหลือแล้ว > 4 ชม.
+                </td>
+                <td>
+                  <span id="r4">0</span>
+                </td>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="listpn" class="listPanel shadow2" style="display: none;">
+    <div class="" style="padding: 0px 5px;">
+      <table class="table table-condensed" style="border: none;margin:0px; padding:0px;">
+        <thead>
+          <tr>
+            <td>
+              <span id="panelListContent">รายการร้องขอ</span>
+            </td>
+            <td class="text-right">
+              <div id="btnCloseList">
+                <i class="fa fa-close" style="cursor: pointer;"></i>
+              </div>
+            </td>
+          </tr>
+        </thead>
+      </table>
+      <hr style="margin:0px; padding:0px;">
+      <div id="listContent">
+        <table class="table table-condensed">
+          <thead>
+            <tr style="background: #4D6F71; color: #fff;">
+              <td>
+                วัน-เวลาแจ้ง
+              </td>
+              <td class="text-left">
+                หมายเลขโทรศัพท์
+              </td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td colspan="2">
+                ไม่พบข้อมูล
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <body>
+    <div id="map-canvas"></div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAewI1LswH0coZUPDe8Pvy39j4sbxmgCZU&callback=initMap" async defer></script>
+  </body>
+  <div class="doctor_show">
+    <div class="msg_data">
+      <!--เนื้อหาใน popup message-->
+    </div>
+  </div>
+  <div id="overlay"></div>
+  <script type="text/javascript" src="bak_js/index.js"></script>
+  <script type="text/javascript" src="bak_js/map.js"></script>
+</html>

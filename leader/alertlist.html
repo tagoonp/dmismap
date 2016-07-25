@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>DMISmap: A Prototype of Disaster Data Management System in the U-Tapao Cathment using Google Map</title>
+    <link href='https://fonts.googleapis.com/css?family=Kanit&subset=thai,latin' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="../css/style.css" charset="utf-8">
+    <link rel="stylesheet" href="../css/infowindow.css" charset="utf-8">
+    <link href="../libraries/seven7/stylesheets/bootstrap.min.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="../libraries/seven7/stylesheets/datatables.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="../libraries/seven7/stylesheets/datepicker.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="../libraries/seven7/stylesheets/timepicker.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="../libraries/seven7/stylesheets/bootstrap-editable.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="../libraries/seven7/stylesheets/select2.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="../libraries/seven7/stylesheets/style.css" media="all" rel="stylesheet" type="text/css" />
+    <script src="../libraries/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../libraries/sweetalert/dist/sweetalert.css">
+    <link rel="stylesheet" href="../libraries/font-awesome/css/font-awesome.min.css">
+    <script type="text/javascript" src="../libraries/seven7/jquery/jquery.js"></script>
+    <script src="../libraries/jquery/jquery-1.9.1.js" type="text/javascript"></script>
+    <script src="../libraries/jquery/jquery-ui.js" type="text/javascript"></script>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+  </head>
+  <div class="navigationbar">
+    <div class="nav-container">
+      <table  width="100%" border="0">
+        <tr>
+          <td width="300">
+            <img src="../images/RTIlogo.png" alt="" />
+          </td>
+          <td>
+            <div class="text-left" >
+              <a href="index.html" class="link-a"><i class="fa fa-home"></i> หน้าหลัก</a> &nbsp;&nbsp;
+              <a href="alertlist.html" class="link-a">รายการร้องขอทั้งหมด</a> &nbsp;&nbsp;
+              <a href="about.html" class="link-a">เกี่ยวกับโครงการ</a> &nbsp;&nbsp;
+              <a href="developer.html" class="link-a">ทีมพัฒนา</a> &nbsp;&nbsp;
+              <a href="document.html" class="link-a">คู่มือการใช้งาน</a> &nbsp;&nbsp;
+            </div>
+          </td>
+          <td width="100p">
+            <div id="login" class="text-center" style=" height: 40px; padding-top: 8px;">
+              <i class="th"></i> ออกจากระบบ
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="container-fluid" style="padding-top: 60px;">
+    <div class="row">
+      <div class="col-sm-12" id="recordPanel">
+        <table class="table table-bordered" style="border: none; border-weight: 0px;">
+          <thead style="border: none; border-weight: 0px;">
+              <tr style="border: none; border-weight: 0px;">
+                <th style="border: none; border-weight: 0px;">#</th>
+                <th style="background: #8EBEEF; color: #fff; ">วัน-เวลาที่แจ้ง</th>
+                <th style="background: #8EBEEF; color: #fff; ">ชื่อผู้แจ้ง</th>
+                <th style="background: #8EBEEF; color: #fff; ">หมายเลขโทรศัพท์</th>
+                <th style="background: #8EBEEF; color: #fff; ">สถานะปัจจุบัน</th>
+                <th style="background: #8EBEEF; color: #fff; ">ระดับความต้องการ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="6">ไม่พบข้อมูล</td>
+              </tr>
+            </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <body>
+
+  </body>
+
+  <script type="text/javascript" src="js/alertlist.js"></script>
+</html>
