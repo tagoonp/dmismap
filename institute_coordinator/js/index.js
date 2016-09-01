@@ -18,7 +18,7 @@ $(document).ready(function(){
     $(".loadingDiv").fadeToggle("",function(){ // แสดงส่วนของ เนื้อหา popup
       setTimeout(function(){
         initMap();
-        loadAlertListContent(0);
+        loadAlertListContent(1);
       },1000);
     });
   });
@@ -91,7 +91,7 @@ $(function(){
           $.post("../core/check-record-num.php",{},function(result){
             numOfRecord = result;
           });
-          
+
           $(".loadingDiv").fadeToggle("fast",function(){ });
           if(result=='Y'){
             swal("บันทึกเรียบร้อย!", "รายการแจ้งร้องขอดังกล่าวถูกบันทึกเรียบร้อย!", "success");

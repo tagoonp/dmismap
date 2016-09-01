@@ -1,4 +1,5 @@
 <?php
+session_start();
 date_default_timezone_set("Asia/Bangkok");
 include "../configuration/connect.class.php";
 $db = new database();

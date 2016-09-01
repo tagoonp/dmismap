@@ -1,25 +1,31 @@
 <?php
+session_start();
 date_default_timezone_set("Asia/Bangkok");
 include "../configuration/connect.class.php";
 $db = new database();
 $db->connect();
+
+$sessionName = $db->getSessionname();
 
 $stage = 0;
 if(isset($_POST['alertStage'])){
   $stage = $_POST['alertStage'];
 }
 
+$strSQL = sprintf("SELECT * FROM dsw1_user WHERE username = '%s'", mysql_real_escape_string($_SESSION[$sessionName.'sessUsername']));
+$resultCheck = $db->select($strSQL,false,true);
+
 // $strSQL = sprintf("SELECT * FROM dsw1_alert WHERE 1 ORDER BY alt_id DESC LIMIT 0, 200");
-$strSQL = sprintf("SELECT * FROM dsw1_alert WHERE 1 LIMIT 0, 200");
+$strSQL = sprintf("SELECT * FROM dsw1_alert WHERE 1  AND id_evt = '".$resultCheck[0]['user_eventgroup_id']."' LIMIT 0, 200");
 
 if($stage==1){
-  $strSQL = sprintf("SELECT * FROM dsw1_alert WHERE alt_stage = '1' LIMIT 0, 100");
+  $strSQL = sprintf("SELECT * FROM dsw1_alert WHERE alt_stage = '1' AND id_evt = '".$resultCheck[0]['user_eventgroup_id']."' LIMIT 0, 100");
 }else if($stage==2){
-  $strSQL = sprintf("SELECT * FROM dsw1_alert WHERE alt_stage = '2' LIMIT 0, 100");
+  $strSQL = sprintf("SELECT * FROM dsw1_alert WHERE alt_stage = '2' AND id_evt = '".$resultCheck[0]['user_eventgroup_id']."' LIMIT 0, 100");
 }else if($stage==3){
-  $strSQL = sprintf("SELECT * FROM dsw1_alert WHERE alt_stage = '3' LIMIT 0, 100");
+  $strSQL = sprintf("SELECT * FROM dsw1_alert WHERE alt_stage = '3' AND id_evt = '".$resultCheck[0]['user_eventgroup_id']."' LIMIT 0, 100");
 }else if($stage==4){
-  $strSQL = sprintf("SELECT * FROM dsw1_alert WHERE alt_stage = '4' LIMIT 0, 100");
+  $strSQL = sprintf("SELECT * FROM dsw1_alert WHERE alt_stage = '4' AND id_evt = '".$resultCheck[0]['user_eventgroup_id']."' LIMIT 0, 100");
 }
 
 $result = $db->select($strSQL,false,true);

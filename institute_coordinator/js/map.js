@@ -63,9 +63,6 @@ function initSubMap(){
               // แสดงข้อมูลสถานที่ใน textarea ที่มี id เท่ากับ place_value
               $("#txt-placedetail").val(results[0].formatted_address); //
             }
-          } else {
-            // กรณีไม่มีข้อมูล
-          // alert("Geocoder failed due to: " + status);
           }
         });
 
@@ -85,7 +82,6 @@ function searchPlace(){
 					my_Marker.setPosition(my_Point); // กำหนดตำแหน่งของตัว marker เท่ากับ พิกัดผลลัพธ์
 					$("#txt-lat").val(my_Point.lat());  // เอาค่า latitude พิกัดผลลัพธ์ แสดงใน textbox id=lat_value
 					$("#txt-lng").val(my_Point.lng());  // เอาค่า longitude พิกัดผลลัพธ์ แสดงใน textbox id=lon_value
-					// $("#zoom_value").val(map.getZoom()); // เอาขนาด zoom ของแผนที่แสดงใน textbox id=zoom_valu
 
           geocoder.geocode({'latLng': my_Point}, function(results, status) {
       		  if (status == google.maps.GeocoderStatus.OK) {
@@ -95,14 +91,12 @@ function searchPlace(){
         			}
       		  } else {
       			  // กรณีไม่มีข้อมูล
-      			// alert("Geocoder failed due to: " + status);
-            $("#txt-placedetail").val("");// กำหนดค่า textbox id=namePlace ให้ว่างสำหรับค้นหาใหม่
+              $("#txt-placedetail").val("");// กำหนดค่า textbox id=namePlace ให้ว่างสำหรับค้นหาใหม่
       		  }
       		});
 
 				}else{
 					// ค้นหาไม่พบแสดงข้อความแจ้ง
-					// alert("Geocode was not successful for the following reason: " + status);
 					$("#txt-placedetail").val("");// กำหนดค่า textbox id=namePlace ให้ว่างสำหรับค้นหาใหม่
 				 }
 			});
@@ -466,7 +460,7 @@ function fetchMarker2(){
         $(".loadingDiv").fadeToggle("fast",function(){ });
       });
     }, 500);
-    
+
     setMapOnCase(null, 3);
 
   });

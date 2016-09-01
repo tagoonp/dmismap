@@ -467,8 +467,8 @@ if($_SESSION[$sessionName.'sessID'] != session_id()){
               <div class="col-sm-8">
                 <div class="" style="margin-top: 5px;">
                   <select class="form-control" name="txtStageList" id="txtStageList" style="width: 250px; border-radius: 0px; font-size: 14px; ">
-                    <option value="0" selected="">ทั้งหมด</option>
-                    <option value="1">การร้องขอ  </option>
+                    <option value="0">ทั้งหมด</option>
+                    <option value="1" selected="">การร้องขอ  </option>
                     <option value="2">กำลังดำเนินการ  </option>
                     <option value="3">ช่วยเหลือแล้ว  </option>
                     <option value="4">ช่วยเหลือแล้ว (มากกว่า 4 ชั่วโมง)  </option>
